@@ -15,6 +15,9 @@ FROM node:26-alpine AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 
+# Install the security fixes Alpine has released since the base image was built.
+RUN apk upgrade --no-cache
+
 # Production dependencies only: no TypeScript compiler, no test tools.
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
