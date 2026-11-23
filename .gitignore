@@ -1,1 +1,8 @@
 avoid.md
+# Terraform: local state, provider cache, saved plans and private values
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+terraform.tfvars
