@@ -88,17 +88,15 @@ The guide puts the API at the repository root. Here it is in `app/`.
 - [x] State stored in S3 at `dev/vpc/terraform.tfstate`, with lock files
 - [x] Prod stack defined in `infra/terraform/envs/prod/vpc`. It is **not
       applied** and nothing in AWS exists for it.
-- [x] Committed and pushed on the branch `add-network-terraform`
+- [x] Pull request 3 merged: Terraform for the VPC
 
 ## Left to do
 
 ### Loose ends
 
-- [ ] Merge pull request 3, which holds the Terraform from the branch
-      `add-network-terraform`
 - [ ] Check the ECR scan result of the newest image
-- [ ] Delete the merged branches `add-typescript-api` and
-      `fix-image-scan-findings` (optional)
+- [ ] Delete the merged branches `add-typescript-api`,
+      `fix-image-scan-findings` and `add-network-terraform` (optional)
 
 ### Phase 7: Security groups and load balancer
 
