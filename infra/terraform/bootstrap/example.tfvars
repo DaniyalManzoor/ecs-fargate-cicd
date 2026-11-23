@@ -4,6 +4,7 @@
 #
 # Terraform loads terraform.tfvars automatically, and git ignores it.
 # This example file is not loaded by Terraform; it only documents the setting.
-# With the account ID set, Terraform refuses to run against any other account.
+# The account ID is required. Terraform will not run without it, and refuses
+# to run against any other account.
 
 aws_account_id = "123456789012" # your 12-digit AWS account ID

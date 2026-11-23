@@ -27,12 +27,12 @@ variable "aws_profile" {
 }
 
 variable "aws_account_id" {
-  description = "The 12-digit account this environment belongs to. Set it in terraform.tfvars, which git ignores."
+  description = "The 12-digit account this environment belongs to. Required. Set it in terraform.tfvars, which git ignores."
   type        = string
-  default     = null
+  nullable    = false
 
   validation {
-    condition     = var.aws_account_id == null || can(regex("^[0-9]{12}$", var.aws_account_id))
+    condition     = can(regex("^[0-9]{12}$", var.aws_account_id))
     error_message = "aws_account_id must be exactly 12 digits."
   }
 }

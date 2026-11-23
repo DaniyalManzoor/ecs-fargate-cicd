@@ -28,9 +28,14 @@ variable "aws_profile" {
 }
 
 variable "aws_account_id" {
-  description = "The 12-digit account the lab belongs to. Set it in terraform.tfvars, which git ignores."
+  description = "The 12-digit account the lab belongs to. Required. Set it in terraform.tfvars, which git ignores."
   type        = string
-  default     = null
+  nullable    = false
+
+  validation {
+    condition     = can(regex("^[0-9]{12}$", var.aws_account_id))
+    error_message = "aws_account_id must be exactly 12 digits."
+  }
 }
 
 variable "state_bucket_name" {
@@ -43,8 +48,10 @@ provider "aws" {
   region  = var.aws_region
   profile = var.aws_profile
 
-  # When aws_account_id is set, Terraform refuses to run against any other account.
-  allowed_account_ids = var.aws_account_id == null ? null : [var.aws_account_id]
+  # Terraform refuses to run against any other account. The variable has no
+  # default, so a run without a terraform.tfvars file fails instead of running
+  # unguarded.
+  allowed_account_ids = [var.aws_account_id]
 }
 
 resource "aws_s3_bucket" "state" {
